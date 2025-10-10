@@ -18,7 +18,7 @@ services:
 
   dumbkv:
     build:
-      context: .
+      context: .                  # test locally
       dockerfile: Dockerfile
     image: dumbkv_app:latest
     container_name: dumbkv_app
