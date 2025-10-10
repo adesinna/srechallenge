@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: dumbkv_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  dumbkv:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dumbkv_app:latest
+    container_name: dumbkv_app
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_TYPE: ${DATABASE_TYPE}
+      DATABASE_LOCATION: ${DATABASE_LOCATION}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
