@@ -1,5 +1,5 @@
-# base image
-FROM ubuntu:24.04   # this base image works during testing since ubuntu 24.10 does not exist in anymore
+# base image, note:this base image works during testing since ubuntu 24.10 does not exist in anymore
+FROM ubuntu:24.04
 
 # uv binaries
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
