@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-
   pull_request:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }} # avoid running multiple builds on same branch
@@ -48,8 +49,8 @@ jobs:
         with:
           context: .
           push: true
-          provenance: true      # Builds provenance attestation, generates how,who and by whom the image is built
-          sbom: true            # Generates Software Bill of Materials, like OS package, py package
+          provenance: true         # Builds provenance attestation, generates how,who and by whom the image is built
+          sbom: true               # Generates Software Bill of Materials, like OS package, py package
           tags: ghcr.io/${{ github.repository }}:latest
           cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:latest
           cache-to: type=registry,ref=ghcr.io/${{ github.repository }}:latest,mode=max
