@@ -20,6 +20,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: dumbkv_app:latest
     container_name: dumbkv_app
     ports:
       - "8000:8000"
