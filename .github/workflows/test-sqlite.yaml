@@ -16,11 +16,11 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: Install uv (Rust-based Python tooling)
+      - name: Install uv
         run: pip install uv
 
       - name: Install Dependencies
         run: uv sync --frozen
 
-      - name: Run Tests (SQLite In-Memory Backend)
+      - name: Run Tests
         run: uv run python -m pytest -v
