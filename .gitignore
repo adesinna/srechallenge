@@ -14,3 +14,5 @@ wheels/
 
 # Default database location
 dumbkv.db
+
+.idea/
