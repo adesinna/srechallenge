@@ -47,8 +47,8 @@ jobs:
         with:
           context: .
           push: true
-          provenance: true
-          sbom: true
+          provenance: true   #provenance: who, whom and how it was built
+          sbom: true     # SBOM (Software Bill of Materials)
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ steps.version.outputs.version }}
