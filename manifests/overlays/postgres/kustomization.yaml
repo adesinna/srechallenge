@@ -5,6 +5,9 @@ resources:
   - ../../base
   - configmap.yaml
   - namespace.yaml
+  - postgres-statefulset.yaml
+  - secrets.yaml
+  - svc-headless.yaml
 
 namespace: ns-postgres
 nameSuffix: -postgres

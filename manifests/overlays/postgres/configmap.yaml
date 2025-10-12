@@ -3,7 +3,5 @@ kind: ConfigMap
 metadata:
   name: postgres-config
 data:
-  DATABASE_HOST: postgres-service
-  DATABASE_NAME: postgres
-  DATABASE_LOCATION=postgres://postgres:postgres@localhost/postgres
-  DATABASE_TYPE=postgres
+  DATABASE_TYPE: "postgres"
+  POSTGRES_DB: "postgres"

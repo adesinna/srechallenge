@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: dumbkv-postgres
 spec:
-  serviceName: dumbkv-postgres-headless
+  serviceName: headless-svc
   replicas: 1
   selector:
     matchLabels:
@@ -22,34 +22,31 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: dumbkv-postgres-secret
-                  key: POSTGRES_USER
+                  name: postgres-secret
+                  key: DATABASE_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: dumbkv-postgres-secret
-                  key: POSTGRES_PASSWORD
+                  name: postgres-secret
+                  key: DATABASE_PASSWORD
             - name: POSTGRES_DB
               valueFrom:
-                secretKeyRef:
-                  name: dumbkv-postgres-secret
+                configMapKeyRef:
+                  name: postgres-config
                   key: POSTGRES_DB
           readinessProbe:
             exec:
-              command:
-                - pg_isready
-                - -U
-                - postgres
+              command: ["pg_isready", "-U", "postgres"]
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             exec:
-              command:
-                - pg_isready
-                - -U
-                - postgres
+              command: ["pg_isready", "-U", "postgres"]
             initialDelaySeconds: 15
             periodSeconds: 20
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
       volumeClaimTemplates:
         - metadata:
             name: postgres-storage

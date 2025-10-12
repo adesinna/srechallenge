@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dumbkv-app
+spec:
+  template:
+    spec:
+      containers:
+        - name: dumbkv-container
+          # Remove SQLite volume mount since Postgres holds data
+          volumeMounts: []
+          env:
+            - name: DATABASE_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: dumbkv-config
+                  key: DATABASE_TYPE
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: dumbkv-config
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: DATABASE_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: DATABASE_PASSWORD
+            - name: DATABASE_LOCATION
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@headless-svc-postgres/$(POSTGRES_DB)
+      # Remove SQLite PVC
+      volumes: []
