@@ -6,7 +6,3 @@ spec:
   selector:
     app: null
     type: sqlite
-  ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
