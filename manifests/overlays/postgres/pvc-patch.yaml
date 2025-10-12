@@ -2,7 +2,4 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: dumbkv-pvc
-spec:
-  resources:
-    requests:
-      storage: "5Gi"
+$patch: delete     # we do not need the pvc for postgres

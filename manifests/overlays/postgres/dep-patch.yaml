@@ -13,13 +13,18 @@ spec:
             - name: DATABASE_TYPE
               valueFrom:
                 configMapKeyRef:
-                  name: dumbkv-config
+                  name: config
                   key: DATABASE_TYPE
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
-                  name: dumbkv-config
+                  name: config
                   key: POSTGRES_DB
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: DATABASE_HOST
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
@@ -31,6 +36,6 @@ spec:
                   name: postgres-secret
                   key: DATABASE_PASSWORD
             - name: DATABASE_LOCATION
-              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@headless-svc-postgres/$(POSTGRES_DB)
+              value: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$DATABASE_HOST/$POSTGRES_DB
       # Remove SQLite PVC
       volumes: []
