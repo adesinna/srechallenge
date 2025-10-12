@@ -13,7 +13,7 @@ spec:
         app: dumbkv
     spec:
       containers:
-        - name: "container-name"
+        - name: dumbkv-container
           image: ghcr.io/adesinna/srechallenge:latest
           ports:
             - containerPort: 8000
