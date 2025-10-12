@@ -4,4 +4,4 @@ metadata:
   name: sqlite-config
 data:
   DATABASE_TYPE: sqlite
-  DATABASE_LOCATION: /dumbkvstore/dumbkv.db
+  DATABASE_LOCATION: dumbkv.db
