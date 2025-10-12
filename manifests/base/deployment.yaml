@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: "container-name"
-          image:  ghcr.io/adesinna/srechallenge:latest
+          image: ghcr.io/adesinna/srechallenge:latest
           ports:
             - containerPort: 8000
           envFrom:
