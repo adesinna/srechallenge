@@ -5,3 +5,5 @@ metadata:
 data:
   DATABASE_HOST: postgres-service
   DATABASE_NAME: postgres
+  DATABASE_LOCATION=postgres://postgres:postgres@localhost/postgres
+  DATABASE_TYPE=postgres

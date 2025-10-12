@@ -6,10 +6,6 @@ resources:
   - svc.yaml
   - deployment.yaml
   - pvc.yaml
-  - namespace.yaml
-
-namespace: thinkific
-namePrefix: dev-
 labels:
   - pairs:
       app: dumbkv-app

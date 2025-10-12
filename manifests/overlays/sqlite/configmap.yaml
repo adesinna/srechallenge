@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: dev-sqlite-config
-  namespace: thinkific
+  name: sqlite-config
 data:
   DATABASE_TYPE: sqlite
   DATABASE_LOCATION: /dumbkvstore/dumbkv.db

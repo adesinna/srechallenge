@@ -4,5 +4,4 @@ metadata:
   name: svc
 spec:
   selector:
-    app: null
     type: sqlite

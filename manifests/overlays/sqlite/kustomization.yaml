@@ -4,7 +4,11 @@ kind: Kustomization
 resources:
   - ../../base
   - configmap.yaml
+  - namespace.yaml
+
+namespace: ns-sqlite
 nameSuffix: -sqlite
+namePrefix: dev-
 labels:
   - pairs:
       type: sqlite
@@ -14,3 +18,16 @@ patches:
   - path: deployment-patch.yaml
   - path: svc-patch.yaml
   - path: pvc-patch.yaml
+
+  # inline patches
+  - patch: |-
+      apiVersion: storage.k8s.io/v1
+      kind: StorageClass
+      metadata:
+        name: efs
+        nameSuffix: ""      # I dont want the name suffix to apply to storage class
+        namePrefix: ""
+    target:
+      kind: StorageClass
+      name: efs
+ 

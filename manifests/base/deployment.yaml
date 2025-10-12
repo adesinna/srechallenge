@@ -12,6 +12,10 @@ spec:
       labels:
         app: dumbkv
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 2000
       containers:
         - name: dumbkv-container
           image: ghcr.io/adesinna/srechallenge:latest
@@ -36,6 +40,13 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 20
             failureThreshold: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
       volumes:
         - name: dumbkv-storage
           persistentVolumeClaim:

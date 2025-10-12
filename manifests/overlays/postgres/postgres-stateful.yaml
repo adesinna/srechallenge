@@ -1,45 +1,61 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres
+  name: dumbkv-postgres
 spec:
-  serviceName: "postgres"      # Headless service name
+  serviceName: dumbkv-postgres-headless
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: dumbkv-postgres
   template:
     metadata:
       labels:
-        app: postgres
+        app: dumbkv-postgres
     spec:
       containers:
         - name: postgres
-          image: postgres:15
+          image: postgres:latest
           ports:
             - containerPort: 5432
           env:
-            - name: POSTGRES_DB
-              value: "dumbkvdb"
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
-                  key: DATABASE_USER
+                  name: dumbkv-postgres-secret
+                  key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
-                  key: DATABASE_PASSWORD
-          volumeMounts:
-            - name: postgres-storage
-              mountPath: /var/lib/postgresql/data
-  volumeClaimTemplates:
-    - metadata:
-        name: postgres-storage
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 10Gi
-        storageClassName: standard-rwo   # your StorageClass
+                  name: dumbkv-postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: dumbkv-postgres-secret
+                  key: POSTGRES_DB
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgres
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgres
+            initialDelaySeconds: 15
+            periodSeconds: 20
+      volumeClaimTemplates:
+        - metadata:
+            name: postgres-storage
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            storageClassName: efs
+            resources:
+              requests:
+                storage: 1Gi
