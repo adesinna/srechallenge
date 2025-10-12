@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ../../base
   - configmap.yaml
+namespace: thinkific
 nameSuffix: -sqlite
 labels:
   - pairs:
