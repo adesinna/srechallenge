@@ -47,12 +47,12 @@ spec:
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
-      volumeClaimTemplates:
-        - metadata:
-            name: postgres-storage
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            storageClassName: efs
-            resources:
-              requests:
-                storage: 1Gi
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: efs
+        resources:
+          requests:
+            storage: "1Gi"
