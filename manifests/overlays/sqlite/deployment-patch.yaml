@@ -3,15 +3,17 @@ kind: Deployment
 metadata:
   name: dumbkv-app
 spec:
-  spec:
-    containers:
-      - name: "sqlite-py-container"
-        envFrom:
-          - configMapRef:
-              name: "dev-sqlite-config-sqlite" # since we applied a suffix in kustomization
-        volumeMounts:
-          - name: dumbkv-storage
-    volumes:
-           - name: dumbkv-storage
-             persistentVolumeClaim:
-               claimName: "dev-dumbkv-pvc-sqlite"
+  template:
+    spec:
+      containers:
+        - name: sqlite-py-container
+          envFrom:
+            - configMapRef:
+                name: dev-sqlite-config-sqlite   # matches Kustomize suffix
+          volumeMounts:
+            - name: dumbkv-storage
+              mountPath: /dumbkvstore
+      volumes:
+        - name: dumbkv-storage
+          persistentVolumeClaim:
+            claimName: dev-dumbkv-pvc-sqlite
