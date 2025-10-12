@@ -13,15 +13,15 @@ spec:
         app: dumbkv
     spec:
       containers:
-        - name: ""
+        - name: "container-name"
           image:  ghcr.io/adesinna/srechallenge:latest
           ports:
             - containerPort: 8000
           envFrom:
             - configMapRef:
-                name: ""
+                name: "configmap-name"
           volumeMounts:
-            - name: ""
+            - name: dumbkv-storage
               mountPath: /dumbkvstore
           readinessProbe:
             httpGet:
@@ -39,4 +39,4 @@ spec:
       volumes:
         - name: dumbkv-storage
           persistentVolumeClaim:
-            claimName: ""
+            claimName: "pvc-name"
