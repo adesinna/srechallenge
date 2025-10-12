@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:latest
+          image: postgres:16-alpine
           ports:
             - containerPort: 5432
           env:
@@ -34,6 +34,11 @@ spec:
                 configMapKeyRef:
                   name: config
                   key: POSTGRES_DB
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
           readinessProbe:
             exec:
               command: ["pg_isready", "-U", "postgres"]
@@ -44,9 +49,6 @@ spec:
               command: ["pg_isready", "-U", "postgres"]
             initialDelaySeconds: 15
             periodSeconds: 20
-          volumeMounts:
-            - name: postgres-storage
-              mountPath: /var/lib/postgresql/data
   volumeClaimTemplates:
     - metadata:
         name: postgres-storage

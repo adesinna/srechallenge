@@ -8,6 +8,8 @@ resources:
   - postgres-statefulset.yaml
   - secrets.yaml
   - svc-headless.yaml
+  - dep-patch.yaml
+  - pvc-patch.yaml
 
 namespace: ns-postgres
 namePrefix: postgres-
