@@ -6,7 +6,8 @@ resources:
   - configmap.yaml
   - namespace.yaml
 
-namespace: sqlite
+namespace: sqlite-ns
+namePrefix: sqlite-
 labels:
   - pairs:
       type: sqlite

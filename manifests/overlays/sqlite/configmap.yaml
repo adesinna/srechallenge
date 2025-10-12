@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: sqlite-config
+  name: config
 data:
   DATABASE_TYPE: sqlite
   DATABASE_LOCATION: dumbkv.db
