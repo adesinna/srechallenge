@@ -5,6 +5,7 @@ resources:
   - ../../base
   - configmap.yaml
 namespace: thinkific
+namePrefix: dev-
 nameSuffix: -sqlite
 labels:
   - pairs:
