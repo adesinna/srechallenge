@@ -10,7 +10,6 @@ resources:
   - svc-headless.yaml
 
 namespace: ns-postgres
-nameSuffix: -postgres
 labels:
   - pairs:
       type: postgres

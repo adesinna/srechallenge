@@ -6,9 +6,7 @@ resources:
   - configmap.yaml
   - namespace.yaml
 
-namespace: ns-sqlite # suffix does not apply to namespace
-nameSuffix: -sqlite
-namePrefix: dev-
+namespace: sqlite
 labels:
   - pairs:
       type: sqlite

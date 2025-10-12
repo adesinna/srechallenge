@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dumbkv-app
+  name: sqlite-dep
 spec:
   template:
     spec:
@@ -9,8 +9,8 @@ spec:
         - name: dumbkv-container  # container name is a must for strategic patches
           envFrom:
             - configMapRef:
-                name: dev-sqlite-config-sqlite   # matches Kustomize suffix
+                name: sqlite-config
       volumes:
         - name: dumbkv-storage
           persistentVolumeClaim:
-            claimName: dev-dumbkv-pvc-sqlite
+            claimName: sqlite-pvc

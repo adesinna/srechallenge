@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dumbkv-pvc
+  name: sqlite-pvc
 spec:
   resources:
     requests:
