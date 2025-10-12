@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ../../base
   - configmap.yaml
-nameSuffix: sqlite
+nameSuffix: -sqlite
 labels:
   - pairs:
       type: sqlite
