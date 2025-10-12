@@ -6,6 +6,7 @@ spec:
   template:
     spec:
       containers:
+        - name: dumbkv-container  # container name is a must for strategic patches
           envFrom:
             - configMapRef:
                 name: dev-sqlite-config-sqlite   # matches Kustomize suffix
