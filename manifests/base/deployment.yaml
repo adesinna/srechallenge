@@ -26,7 +26,7 @@ spec:
                 name: "configmap-name"
           volumeMounts:
             - name: dumbkv-storage
-              mountPath: /dumbkvstore
+              mountPath: /data/dumbkvstore
           readinessProbe:
             httpGet:
               path: /health
