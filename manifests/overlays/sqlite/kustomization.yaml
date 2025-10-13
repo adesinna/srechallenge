@@ -21,8 +21,5 @@ patches:
   - path: pvc-patch.yaml
   - path: gateway-patch.yaml
 
-nameReference:  # names you should ignore
-  - kind: StorageClass
-    fieldSpecs:
-      - path: metadata/name
-        create: false
+transformers:
+  - prefix-removal.yaml

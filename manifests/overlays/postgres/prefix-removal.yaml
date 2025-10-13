@@ -1,0 +1,10 @@
+apiVersion: builtin
+kind: PrefixTransformer
+metadata:
+  name: strip-prefix
+prefix: ""
+fieldSpecs:
+  - kind: StorageClass
+    path: metadata/name
+  - kind: Gateway
+    path: metadata/name
