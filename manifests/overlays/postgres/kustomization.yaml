@@ -6,6 +6,8 @@ resources:
   - namespace.yaml
   - postgres-statefulset.yaml
   - svc-headless.yaml
+  - configmap.yaml
+  - secrets.yaml
 
 namespace: ns-postgres
 namePrefix: postgres-

@@ -17,9 +17,6 @@ spec:
           image: ghcr.io/adesinna/srechallenge:latest
           ports:
             - containerPort: 8000
-          envFrom:
-            - configMapRef:
-                name: "configmap-name"
           volumeMounts:
             - name: dumbkv-storage
               mountPath: /data/dumbkvstore

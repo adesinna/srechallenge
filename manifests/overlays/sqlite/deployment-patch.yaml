@@ -7,9 +7,17 @@ spec:
     spec:
       containers:
         - name: dumbkv-container  # container name is a must for strategic patches
-          envFrom:
-            - configMapRef:
-                name: config
+          env:
+            - name: DATABASE_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: DATABASE_TYPE
+            - name: DATABASE_LOCATION
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: DATABASE_LOCATION
       volumes:
         - name: dumbkv-storage
           persistentVolumeClaim:
