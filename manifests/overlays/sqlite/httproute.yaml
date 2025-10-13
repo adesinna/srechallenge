@@ -3,6 +3,9 @@ kind: HTTPRoute
 metadata:
   name: httproute
 spec:
+  tls:
+      certificateRefs:
+        - name: tls
   parentRefs:
     - name: dumbkv-gateway
       namespace: default
@@ -17,3 +20,4 @@ spec:
       backendRefs:
         - name: dumbkv-svc
           port: 8000
+

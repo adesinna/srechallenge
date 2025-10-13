@@ -1,19 +1,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cert
+  name: tls
 spec:
   secretName: postgres-tls
   issuerRef:
     name: dumbkv-cl
     kind: ClusterIssuer
-  commonName: postgres.shanana.shop
   dnsNames:
     - postgres.shanana.shop
-  solvers:
-    - http01:
-        gatewayHTTPRoute:
-          parentRefs:
-            - name: dumbkv-gateway
-              kind: Gateway
-              namespace: default

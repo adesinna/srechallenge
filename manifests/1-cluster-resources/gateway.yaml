@@ -6,19 +6,17 @@ metadata:
 spec:
   gatewayClassName: nginx
   listeners:
-    - name: http-listener
-      port: 80
+    - name: http
       protocol: HTTP
+      port: 80
       allowedRoutes:
         namespaces:
           from: All
-    - name: https-listener
-      port: 443
+    - name: https
       protocol: HTTPS
-      allowedRoutes:
-        namespaces:
-          from: All
+      port: 443
       tls:
         mode: Terminate
-        certificateRefs:  # we patch at the overlays
-
+      allowedRoutes:
+        namespaces:
+          from: All

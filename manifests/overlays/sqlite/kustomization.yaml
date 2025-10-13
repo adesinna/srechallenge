@@ -19,7 +19,5 @@ patches:
   - path: deployment-patch.yaml
   - path: svc-patch.yaml
   - path: pvc-patch.yaml
-  - path: gateway-patch.yaml
 
-transformers:
-  - prefix-removal.yaml
+
