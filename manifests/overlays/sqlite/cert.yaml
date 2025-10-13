@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert
+spec:
+  secretName: sqlite-tls
+  issuerRef:
+    name: dumbkv-cl
+    kind: ClusterIssuer
+  commonName: shanana.shop
+  dnsNames:
+    - shanana.shop
+    - www.shanana.shop
+  solvers:
+    - http01:
+        gatewayHTTPRoute:
+          parentRefs:
+            - name: dumbkv-gateway
+              kind: Gateway
+              namespace: default

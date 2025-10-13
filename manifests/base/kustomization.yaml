@@ -6,6 +6,8 @@ resources:
   - svc.yaml
   - deployment.yaml
   - pvc.yaml
+  - cluster-issuer.yaml
+  - gateway.yaml
 labels:
   - pairs:
       app: dumbkv-app

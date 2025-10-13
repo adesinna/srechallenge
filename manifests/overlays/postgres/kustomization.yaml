@@ -8,6 +8,8 @@ resources:
   - svc-headless.yaml
   - configmap.yaml
   - secrets.yaml
+  - cert.yaml
+  - httproute.yaml
 
 namespace: ns-postgres
 namePrefix: postgres-
@@ -19,4 +21,10 @@ patches:
   - path: dep-patch.yaml
   - path: svc-patch.yaml
   - path: pvc-patch.yaml
+  - path: gateway-patch.yaml
 
+nameReference:  # names you should ignore
+  - kind: StorageClass
+    fieldSpecs:
+      - path: metadata/name
+        create: false

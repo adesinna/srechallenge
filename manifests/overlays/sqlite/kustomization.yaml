@@ -5,6 +5,8 @@ resources:
   - ../../base
   - configmap.yaml
   - namespace.yaml
+  - cert.yaml
+  - httproute.yaml
 
 namespace: sqlite-ns
 namePrefix: sqlite-
@@ -17,4 +19,10 @@ patches:
   - path: deployment-patch.yaml
   - path: svc-patch.yaml
   - path: pvc-patch.yaml
+  - path: gateway-patch.yaml
 
+nameReference:  # names you should ignore
+  - kind: StorageClass
+    fieldSpecs:
+      - path: metadata/name
+        create: false
