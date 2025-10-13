@@ -7,35 +7,26 @@ spec:
     spec:
       containers:
         - name: dumbkv-container
-          # Remove SQLite volume mount since Postgres holds data
-          volumeMounts: []
+          volumeMounts:
+            - name: dumbkv-storage
+              $patch: delete
+          envFrom:
+            - $patch: delete
+              configMapRef:
+                name: configmap-name
           env:
             - name: DATABASE_TYPE
-              valueFrom:
-                configMapKeyRef:
-                  name: config
-                  key: DATABASE_TYPE
+              value: "postgres"
             - name: POSTGRES_DB
-              valueFrom:
-                configMapKeyRef:
-                  name: config
-                  key: POSTGRES_DB
+              value: "postgres"
             - name: DATABASE_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: config
-                  key: DATABASE_HOST
+              value: "postgres-service"
             - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: DATABASE_USER
+              value: "postgres"
             - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: DATABASE_PASSWORD
+              value: "postgres"
             - name: DATABASE_LOCATION
-              value: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$DATABASE_HOST/$POSTGRES_DB
-      # Remove SQLite PVC
-      volumes: []
+              value: "postgres://postgres:postgres@postgres-service/postgres"
+      volumes:
+        - name: dumbkv-storage
+          $patch: delete

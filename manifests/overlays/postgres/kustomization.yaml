@@ -3,13 +3,9 @@ kind: Kustomization
 
 resources:
   - ../../base
-  - configmap.yaml
   - namespace.yaml
   - postgres-statefulset.yaml
-  - secrets.yaml
   - svc-headless.yaml
-  - dep-patch.yaml
-  - pvc-patch.yaml
 
 namespace: ns-postgres
 namePrefix: postgres-
@@ -18,3 +14,7 @@ labels:
       type: postgres
     includeSelectors: true
 patches:
+  - path: dep-patch.yaml
+  - path: svc-patch.yaml
+  - path: pvc-patch.yaml
+
