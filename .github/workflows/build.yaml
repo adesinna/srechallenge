@@ -8,9 +8,8 @@ on:
     branches:
       - main
 
-
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }} # avoid running multiple builds on same branch
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 env:
   REGISTRY: ghcr.io
@@ -22,7 +21,7 @@ jobs:
 
     permissions:
       contents: read
-      packages: write # needed to push to GHCR
+      packages: write
 
     steps:
       - name: Checkout
@@ -32,6 +31,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to GHCR
+        if: github.event_name != 'pull_request'  # only login in on push
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -45,15 +45,15 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Image version will be tagged as: $VERSION"
 
-      - name: Build and push Docker image with attestations and caching
+      - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: true
-          provenance: true   #provenance: who, whom and how it was built
-          sbom: true     # SBOM (Software Bill of Materials)
+          push: ${{ github.event_name != 'pull_request' }} #Pushes to registry on main branch pushes
+          provenance: true
+          sbom: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ steps.version.outputs.version }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
