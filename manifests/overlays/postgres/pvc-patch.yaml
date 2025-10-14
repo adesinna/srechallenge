@@ -1,0 +1,5 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dumbkv-pvc
+$patch: delete     # we do not need the pvc for postgres

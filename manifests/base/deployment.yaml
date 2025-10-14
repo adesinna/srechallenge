@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dumbkv-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dumbkv
+  template:
+    metadata:
+      labels:
+        app: dumbkv
+    spec:
+      containers:
+        - name: dumbkv-container
+          image: ghcr.io/adesinna/srechallenge:latest
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: dumbkv-storage
+              mountPath: /data/dumbkvstore
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 3
+      volumes:
+        - name: dumbkv-storage
+          persistentVolumeClaim:
+            claimName: "pvc-name"

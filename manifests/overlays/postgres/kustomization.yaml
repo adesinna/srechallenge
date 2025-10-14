@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+  - namespace.yaml
+  - postgres-statefulset.yaml
+  - svc-headless.yaml
+  - configmap.yaml
+  - secrets.yaml
+  - httproute.yaml
+
+namespace: ns-postgres
+namePrefix: postgres-
+labels:
+  - pairs:
+      type: postgres
+    includeSelectors: true
+patches:
+  - path: dep-patch.yaml
+  - path: svc-patch.yaml
+  - path: pvc-patch.yaml
+
+
+

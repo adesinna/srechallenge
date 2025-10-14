@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: dumbkv-cl
+spec:
+  acme:
+    email: shananatest@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: dumbkv-cl-key
+    solvers:
+      - http01:
+          gatewayHTTPRoute:
+            parentRefs:
+              - kind: Gateway
+                name: dumbkv-gateway
+                namespace: default

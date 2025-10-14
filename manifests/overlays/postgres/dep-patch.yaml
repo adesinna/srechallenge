@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dumbkv-app
+spec:
+  template:
+    spec:
+      containers:
+        - name: dumbkv-container
+          volumeMounts: # delete sqlite volumemount
+            - name: dumbkv-storage
+              $patch: delete
+          env:
+            - name: DATABASE_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: DATABASE_TYPE
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: DATABASE_HOST
+            - name: DATABASE_LOCATION
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: DATABASE_LOCATION
+            - name: PGDATA
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: PGDATA
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: POSTGRES_PASSWORD
+      volumes:  # delete SQLite volume
+        - name: dumbkv-storage
+          $patch: delete

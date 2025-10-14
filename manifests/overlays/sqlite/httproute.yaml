@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: httproute
+spec:
+  parentRefs:
+    - name: dumbkv-gateway
+      namespace: default
+  hostnames:
+    - shanana.shop
+    - www.shanana.shop
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: sqlite-dumbkv-svc   # make sure you add the prefix since the svc will be created with prefix
+          port: 8000

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dumbkv-pvc
+spec:
+  resources:
+    requests:
+      storage: "1Gi"
