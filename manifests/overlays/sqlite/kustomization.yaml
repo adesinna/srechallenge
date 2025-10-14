@@ -8,6 +8,9 @@ resources:
   - cert.yaml
   - httproute.yaml
 
+components:
+- ../../components
+
 namespace: sqlite-ns
 namePrefix: sqlite-
 labels:

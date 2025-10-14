@@ -10,6 +10,9 @@ resources:
   - secrets.yaml
   - httproute.yaml
 
+components:
+- ../../components
+
 namespace: ns-postgres
 namePrefix: postgres-
 labels:
