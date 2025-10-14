@@ -9,6 +9,7 @@ spec:
     - www.shanana.shop
     - shanana.shop
     - postgres.shanana.shop
+    - monitor.shanana.shop
   issuerRef:
     name: dumbkv-cl
     kind: ClusterIssuer
