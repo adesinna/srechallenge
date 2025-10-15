@@ -3,7 +3,7 @@ kind: ServiceMonitor
 metadata:
   name: monitor
   labels:
-    monitor: enabled
+    monitor: enabled  # the prometheus is using this
 spec:
   selector:
     matchLabels:

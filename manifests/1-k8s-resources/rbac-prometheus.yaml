@@ -40,3 +40,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: prometheus-applications
+  namespace: default

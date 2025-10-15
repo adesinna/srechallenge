@@ -14,10 +14,7 @@ spec:
   retention: 1d
   scrapeInterval: 30s
   serviceAccountName: prometheus-applications
-  serviceMonitorNamespaceSelector:
-    matchNames:
-      - ns-postgres
-      - sqlite-ns
+  serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector:
     matchLabels:
       monitor: enabled
