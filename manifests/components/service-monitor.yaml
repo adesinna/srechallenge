@@ -3,8 +3,7 @@ kind: ServiceMonitor
 metadata:
   name: monitor
   labels:
-    app: monitor
-    release: prometheus
+    monitor: enabled
 spec:
   selector:
     matchLabels:
