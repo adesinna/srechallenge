@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: dumbkv
+      monitor: enabled  # this will look for service with this label
   endpoints:
   - port: http
     path: /metrics

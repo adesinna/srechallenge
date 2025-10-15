@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: dumbkv-svc
+  labels:
+    monitor: enabled   # to help the prometheus scrape metric
 spec:
   selector: {}
   ports:
