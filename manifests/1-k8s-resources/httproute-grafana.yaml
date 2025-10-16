@@ -13,14 +13,7 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /grafana
+            value: /
       backendRefs:
         - name: prometheus-stack-grafana
           port: 80
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /prometheus
-      backendRefs:
-        - name: prometheus-stack-kube-prom-prometheus
-          port: 9090
