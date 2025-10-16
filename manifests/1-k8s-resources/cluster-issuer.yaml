@@ -7,7 +7,7 @@ spec:
     email: shananatest@gmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt
+      name: dumbkv-cl-key  # ACME secret
     solvers:
       - http01:
           gatewayHTTPRoute:

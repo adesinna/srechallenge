@@ -7,8 +7,7 @@ spec:
     - name: dumbkv-gateway
       namespace: default
   hostnames:
-    - shanana.shop
-    - www.shanana.shop
+    - test.shanana.shop
   rules:
     - matches:
         - path:

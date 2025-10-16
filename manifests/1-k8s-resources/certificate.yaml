@@ -4,12 +4,11 @@ metadata:
   name: default-tls
   namespace: default
 spec:
-  secretName: letsencrypt   # Secret where the certificate will be stored
+  secretName: default-tls-secret   # Secret where the certificate will be stored
   dnsNames:
-    - www.shanana.shop
-    - shanana.shop
-    - postgres.shanana.shop
-    - monitor.shanana.shop
+    - test.shanana.shop  # for the sqlite
+    - dumbkv.shanana.shop # for the postgres  dumbkv.example.com
+    - monitor.shanana.shop # for grafana
   issuerRef:
     name: dumbkv-cl
     kind: ClusterIssuer

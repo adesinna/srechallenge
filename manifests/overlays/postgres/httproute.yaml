@@ -7,7 +7,7 @@ spec:
     - name: dumbkv-gateway
       namespace: default
   hostnames:
-    - postgres.shanana.shop
+    - dumbkv.shanana.shop
   rules:
     - matches:
         - path:
