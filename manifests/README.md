@@ -156,11 +156,17 @@ kubectl run curl-test   --rm -it  \
 -- curl -L http://prometheus-operated.default.svc.cluster.local:9090/api/v1/targets
 
 ##  Cleanup
+
 kubectl delete -f manifests/1-k8s-resources
+
 kubectl delete -k manifests/overlays/sqlite
+
 kubectl delete -k manifests/overlays/postgres
+
 helm uninstall ngf -n nginx-gateway
+
 helm uninstall cert-manager -n cert-manager
+
 helm uninstall prometheus-stack -n monitoring
 
 
