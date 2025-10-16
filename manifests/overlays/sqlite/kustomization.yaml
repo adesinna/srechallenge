@@ -5,8 +5,10 @@ resources:
   - ../../base
   - configmap.yaml
   - namespace.yaml
-  - cert.yaml
   - httproute.yaml
+
+components:
+- ../../components
 
 namespace: sqlite-ns
 namePrefix: sqlite-

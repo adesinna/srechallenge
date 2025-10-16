@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: default-tls
+  namespace: default
+spec:
+  secretName: default-tls-secret   # Secret where the certificate will be stored
+  dnsNames:
+    - test.shanana.shop  # for the sqlite
+    - dumbkv.shanana.shop # for the postgres  dumbkv.example.com
+    - monitor.shanana.shop # for grafana
+  issuerRef:
+    name: dumbkv-cl
+    kind: ClusterIssuer

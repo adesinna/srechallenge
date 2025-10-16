@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: monitor
+  labels:
+    monitor: enabled  # the prometheus is using this
+spec:
+  selector:
+    matchLabels:
+      monitor: enabled  # this will look for service with this label
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 30s
+    scrapeTimeout: 10s
