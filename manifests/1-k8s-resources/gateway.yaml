@@ -18,7 +18,7 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: default-tls        # cert-manager secret
+          - name: letsencrypt        # cert-manager secret
             kind: Secret
       allowedRoutes:
         namespaces:
